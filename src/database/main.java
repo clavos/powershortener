@@ -19,30 +19,6 @@ public class main{
 	static Statement statement = null;
 
 	public static void main(String[] args) {
-		
-
-		    // Remise à zéro de la BD
-		    statement.executeUpdate("DROP TABLE Link;");
-
-		    
-		    //Création de la table
-		    
-		    statement.executeUpdate("INSERT INTO Link (shortLink, longLink) VALUES ('"+shortLink+"','"+longLink+"')");
-		    
-		    // On SELECT l'ensemble des visites pour les afficher
-		    ResultSet resVisites = statement.executeQuery( "SELECT id, idPlanning, nom, note, date  FROM Visites;" );
-		    
-		    // On affiche la table (resultat du select)
-		    while ( resVisites.next() ) {
-		        int idPlanning = resVisites.getInt( "idPlanning" );
-		        int idVisites = resVisites.getInt( "id" );
-		        String nomVisites = resVisites.getString( "nom" );
-		        String noteVisites = resVisites.getString( "note" );
-		        String dateVisites = resVisites.getString( "date" );
-		        
-		        System.out.println(idPlanning+", "+idVisites+", "+nomVisites+", "+noteVisites+", "+dateVisites);
-		    }
-
 
 	}
 	
@@ -98,6 +74,76 @@ public class main{
 		}
 		
 		return state;
+	}
+	
+	/*
+	 * GET d'un couple de lien
+	 * Paramètre url longue
+	 * Retourne un MonBean contenant les deux liens
+	 */
+	public MonBean getBeanLong(String urlLongue) {
+		MonBean bean = new MonBean();
+		String shortLink = null;
+		String longLink = null;
+		
+		try {
+			ResultSet resLink = statement.executeQuery( "SELECT shortLink, longLink FROM jee_intro.Link WHERE longlink = '"+urlLongue+"';" );
+			
+			while ( resLink.next() ) {
+		        shortLink = resLink.getString( "shortLink" );
+		        longLink = resLink.getString( "longLink" );		        
+		    }
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Erreur SQL : "+e);			
+		} finally {
+		    if ( connexion != null )
+		        try {
+		            connexion.close();
+		        } catch ( SQLException ignore ) {
+		        }
+		}
+		
+		bean.setUrlCourte(shortLink);
+		bean.setUrlLongue(longLink);
+		
+		return bean;
+	}
+	
+	/*
+	 * GET d'un couple de lien
+	 * Paramètre url courte
+	 * Retourne un MonBean contenant les deux liens
+	 */
+	public MonBean getBeanShort(String urlCourte) {
+		MonBean bean = new MonBean();
+		String shortLink = null;
+		String longLink = null;
+		
+		try {
+			ResultSet resLink = statement.executeQuery( "SELECT shortLink, longLink FROM jee_intro.Link WHERE longlink = '"+urlCourte+"';" );
+			
+			while ( resLink.next() ) {
+		        shortLink = resLink.getString( "shortLink" );
+		        longLink = resLink.getString( "longLink" );		        
+		    }
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Erreur SQL : "+e);			
+		} finally {
+		    if ( connexion != null )
+		        try {
+		            connexion.close();
+		        } catch ( SQLException ignore ) {
+		        }
+		}
+		
+		bean.setUrlCourte(shortLink);
+		bean.setUrlLongue(longLink);
+		
+		return bean;
 	}
 	
 	
