@@ -1,0 +1,14 @@
+.img-logo{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bloc-main{
+	text-align: center;
+}
+
+.bloc-inscr{
+	position: absolute;
+	bottom: 4%;
+}
