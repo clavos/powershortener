@@ -22,12 +22,12 @@ public class main{
 		
 
 		    // Remise à zéro de la BD
-		    statement.executeUpdate("DROP TABLE Visites;");
+		    statement.executeUpdate("DROP TABLE Link;");
 
 		    
 		    //Création de la table
-		    statement.executeUpdate("CREATE TABLE  jee_intro.Visites (id INT( 11 ) NOT NULL AUTO_INCREMENT ,idPlanning INT ( 11 ) NOT NULL, nom VARCHAR( 20 ) NOT NULL ,note INT( 11 ) NOT NULL ,date VARCHAR( 20 ),PRIMARY KEY ( id ),UNIQUE ( nom )) ENGINE = INNODB;");
-		    statement.executeUpdate("INSERT INTO Visites (idPlanning, nom, note, date) VALUES (9999, 'Alexandre', 14, '01/01/1995')");
+		    
+		    statement.executeUpdate("INSERT INTO Link (shortLink, longLink) VALUES ('"+shortLink+"','"+longLink+"')");
 		    
 		    // On SELECT l'ensemble des visites pour les afficher
 		    ResultSet resVisites = statement.executeQuery( "SELECT id, idPlanning, nom, note, date  FROM Visites;" );
@@ -58,6 +58,7 @@ public class main{
 			Class.forName( "com.mysql.jdbc.Driver" );
 		    connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
 		    statement = connexion.createStatement();
+		    statement.executeUpdate("CREATE TABLE  jee_intro.Link (id INT( 11 ) NOT NULL AUTO_INCREMENT ,shortLink VARCHAR ( 255 ), longLink VARCHAR( 255 ),UNIQUE ( id )) ENGINE = INNODB;");
 		    state = true;
 		} catch (SQLException e) {
 			System.out.println("Erreur SQL : "+e);			
@@ -69,6 +70,32 @@ public class main{
 		        }
 		}
 		
+		
+		return state;
+	}
+	
+	/*
+	 * Ajout d'un couple de lien à la base de données
+	 * True si réussite
+	 * False si echec
+	 */
+	public boolean addLink(String shortLink, String longLink) throws ClassNotFoundException {
+		boolean state = false;
+		try {
+			Class.forName( "com.mysql.jdbc.Driver" );
+		    connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
+		    statement = connexion.createStatement();
+		    statement.executeUpdate("CREATE TABLE  jee_intro.Link (id INT( 11 ) NOT NULL AUTO_INCREMENT ,shortLink VARCHAR ( 255 ), longLink VARCHAR( 255 ),UNIQUE ( id )) ENGINE = INNODB;");
+		    state = true;
+		} catch (SQLException e) {
+			System.out.println("Erreur SQL : "+e);			
+		} finally {
+		    if ( connexion != null )
+		        try {
+		            connexion.close();
+		        } catch ( SQLException ignore ) {
+		        }
+		}
 		
 		return state;
 	}

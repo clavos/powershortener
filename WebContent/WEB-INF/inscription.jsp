@@ -25,11 +25,6 @@
             %>
         </p>
     </div>
-    <div class="bloc-inscr">
-    <form method="post" action="tata">
-    	<input type="submit"value="Revenir à l'accueil" />
-    </form>
-    </div>
         
     </body>
 </html>
