@@ -2,10 +2,14 @@ package dao;
 
 import bean.User;
 
-public interface UserDAO {
+public class UserDAO {
 
-    void creer( User utilisateur ) throws DAOException;
-
-    User trouver( String email ) throws DAOException;
-
+	public String getUsername() {
+        return "id";
+    }
+	
+	public String getPassword() {
+        return "id";
+    }
+    
 }
