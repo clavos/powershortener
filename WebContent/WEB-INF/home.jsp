@@ -13,9 +13,7 @@
         <div class="inner">
           <h3 class="masthead-brand">PowerShortener</h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="#">Home</a>
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link active" href="/Projet_Servlet/index">Home</a>
           </nav>
         </div>
       </header>
@@ -31,7 +29,7 @@
                             <h3 class="mb-0">Crée son compte ou se connecter</h3>
                         </div>
                         <div class="card-body">
-                            <form action="tutu" method="post">
+                            <form action="index" method="post">
 					            <div class="input">
 					                <label for="username">
 					                    <c:if test="${hasErrors}">

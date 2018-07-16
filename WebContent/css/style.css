@@ -116,3 +116,7 @@ main {
 .masthead {
 	margin-bottom: unset !important;
 }
+
+main {
+	color: black !important;
+}

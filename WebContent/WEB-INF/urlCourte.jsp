@@ -25,20 +25,15 @@
         <h1 class="cover-heading">
         <%
             MonBean notreBean = (MonBean) request.getAttribute("userBean");
-    	    out.println(""+notreBean.getName()+", ");
+    	    out.println(""+notreBean.getName()+" ");
             %>
-        Saisir l'URL longue ! :)</h1>
+        Votre URL courte ! :)</h1>
         <p class="lead">
             <%
-            String attribut = (String) request.getAttribute("erreurLog");
-            out.println( attribut );
+            notreBean = (MonBean) request.getAttribute("userBean");
+    	    out.println("http://www.urlst.com/"+notreBean.getUrlCourte()+"/");
             %>
         </p>
-        <form method="post" action="home">
-            <label for="url">URL : </label>
-            <input type="text" name="url" id="url" />
-            <input type="submit"value="Raccourcir" />
-        </form>
       </main>
     </div>
     <script src="js/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

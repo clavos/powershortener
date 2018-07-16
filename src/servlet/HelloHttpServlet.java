@@ -26,10 +26,9 @@ import java.sql.Statement;
 
 
 
-@WebServlet("/home")
+@WebServlet("/index")
 public class HelloHttpServlet extends HttpServlet{
 	
-	ArrayList urlList = new ArrayList<MonBean>();
 	MonBean userBean = new MonBean();
 	
 	   public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,36 +56,28 @@ public class HelloHttpServlet extends HttpServlet{
 						userBean.setName(login);
 						dispatcher = "/WEB-INF/index.jsp";
 					}
+					else {
+						dispatcher = "/WEB-INF/home.jsp";
+					}
+				}
+				else {
+					daouser.inscription(login, password);
+					userBean.setId(daouser.getID(login));
+					userBean.setName(login);
+					dispatcher = "/WEB-INF/index.jsp";
+					
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-	        /*if(storedUser==null || !password.equals("22")) {
-	            session.setAttribute("hasErrors", true);
-	            session.setAttribute("isConnected", false);
-	            //redirect to login page
-	            dispatcher = "/WEB-INF/index.jsp";
-	            
-	            
-	        }*/
-		   
-	        
-		   
-		   /* Connexion à la base de données */
-					    
-
 		    
 		    //urlBean.setUrlLongue(request.getParameter("url"));
 		    //urlBean.setUrlCourte(UUID.randomUUID().toString().replaceAll("-", ""));
-		    //urlList.add(urlBean);
-			      /* int isOK =0;
-			       */
-				   
+
 			   	
 		   request.setAttribute("userBean", userBean);
-		   //dispatcher = "/WEB-INF/inscription.jsp";
 	       this.getServletContext().getRequestDispatcher(dispatcher).include(request, response);
 
 	    }

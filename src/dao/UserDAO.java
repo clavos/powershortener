@@ -32,12 +32,12 @@ public class UserDAO {
 	
 	public boolean exist(String name) throws SQLException {
 		
-		ResultSet resUser = statement.executeQuery( "SELECT COUNT(name) AS isOK FROM USER WHERE name == "+name+";");
+		ResultSet resUser = statement.executeQuery( "SELECT COUNT(name) AS isOK FROM USER WHERE name = '"+name+"';");
 		boolean exist = false;
 		int userna = 0;
 	    while ( resUser.next() ) {
 	        
-	        userna = resUser.getInt( "name" );
+	        userna = resUser.getInt( "isOK" );
 	    }
 	    if (userna == 0) {
 	    	exist = false;
@@ -50,7 +50,7 @@ public class UserDAO {
 	
 	public int getID(String name) throws SQLException {
 		
-		ResultSet resUser = statement.executeQuery( "SELECT id FROM USER WHERE name == "+name+";");
+		ResultSet resUser = statement.executeQuery( "SELECT id FROM USER WHERE name = '"+name+"';");
 		int id = 0;
 	    while ( resUser.next() ) {
 	        
@@ -61,7 +61,7 @@ public class UserDAO {
 	}
 	
 	public String getPassword(int id) throws SQLException {
-		ResultSet resUser = statement.executeQuery( "SELECT pass FROM USER WHERE id == "+id+";");
+		ResultSet resUser = statement.executeQuery( "SELECT pass FROM USER WHERE id = "+id+";");
 		String userna = null;
 	    while ( resUser.next() ) {
 	        
@@ -72,7 +72,7 @@ public class UserDAO {
 	
 	public void inscription (String name, String pass) throws SQLException {
 		
-		ResultSet resUser = statement.executeQuery("INSERT INTO USER name, pass ('"+name+"','"+pass+"')");
+		int resUser = statement.executeUpdate("INSERT INTO USER (name, pass) VALUES ('"+name+"','"+pass+"')");
 		
 	}
     
